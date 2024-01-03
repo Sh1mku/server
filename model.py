@@ -59,10 +59,10 @@ def perform_inference_locomotion(new_data):
 
     # check if correct label is being predicted: we can do this for the test set only:
 
-    print("Actual label: ", y[0])
-    print("Predicted label: ", predicted_class)
-    print("Predicted probability: ", predicted_probability)
-    print("--------------------------")
+    # print("Actual label: ", y[0])
+    # print("Predicted label: ", predicted_class)
+    # print("Predicted probability: ", predicted_probability)
+    # print("--------------------------")
 
     # extract the class label
     predicted_activity = Locomotion_activities[predicted_class]

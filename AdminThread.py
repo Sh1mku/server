@@ -78,7 +78,7 @@ class AdminThread(threading.Thread):
                 print("Connection closed")
                 self.client_socket.close()
                 break
-            sleep(2)
+            sleep(1)
 
     def adminSend(self):
         print("Sending data")
@@ -95,6 +95,8 @@ class AdminThread(threading.Thread):
                     self.adminMessage = "nothing"
                 elif msg[0] == "curAct":
                     action = self.get_current_action()
+                    print("current action: ", action)
+                    action=action+"\n"
                     self.client_socket.send(action.encode())
                 elif msg[0] == "chgPass":
                     self.change_admin_password(msg[1])
