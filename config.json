@@ -1,0 +1,1051 @@
+{
+    "passwords":{
+        "admin": "98765",
+        "user": "12345"
+    },
+    "patient_info":{
+        "name": "kerem",
+        "surname": "can",
+        "title": "Mr.",
+        "telephone": "1234567890",
+        "home_address": "ODTU KKK RZ-33, Kalkanli, Guzelyurt, KKTC"
+
+    },
+    "external_alert_configs":[
+        {
+            "full_name": "Emergency Service",
+            "gsm_number": "911",
+            "email_address": "None"
+        },
+        {
+            "full_name": "KKTC Saglik Bakanligi Cengiz Topel Hastanesi",
+            "gsm_number": "+90 392 723 63 51",
+            "email_adress": "info.lcth@gov.ct.tr"
+        }
+
+    ],
+    "sensor_groups":[
+        {
+            "name": "Group 1 - Accelometers",
+            "location_type": "BODY",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "accX",
+                    "sensor_type": "RKN^"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RKN^"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RKN^"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "HIP"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "HIP"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "HIP"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LUA^"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LUA^"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LUA^"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RUA_"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RUA_"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RUA_"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LH"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LH"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LH"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RKN_"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RKN_"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RKN_"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RWR"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RWR"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RWR"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RUA^"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RUA^"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RUA^"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LUA_"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LUA_"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LUA_"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LWR"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LWR"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LWR"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RH"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RH"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RH"
+                }
+            ]
+        },
+        {
+            "name": "Group 2 - IMUs",
+            "location_type": "BODY",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "accX",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "gyroZ",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "magneticX",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "magneticY",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "magneticZ",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "Quaternion1",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "Quaternion2",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "Quaternion3",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "Quaternion4",
+                    "sensor_type": "BACK"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "gyroZ",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "magneticX",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "magneticY",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "magneticZ",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "Quaternion1",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "Quaternion2",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "Quaternion3",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "Quaternion4",
+                    "sensor_type": "RUA"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "gyroZ",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "magneticX",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "magneticY",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "magneticZ",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "Quaternion1",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "Quaternion2",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "Quaternion3",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "Quaternion4",
+                    "sensor_type": "RLA"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "gyroZ",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "magneticX",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "magneticY",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "magneticZ",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "Quaternion1",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "Quaternion2",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "Quaternion3",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "Quaternion4",
+                    "sensor_type": "LUA"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "gyroZ",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "magneticX",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "magneticY",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "magneticZ",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "Quaternion1",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "Quaternion2",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "Quaternion3",
+                    "sensor_type": "LLA"
+                },
+                {
+                    "name": "Quaternion4",
+                    "sensor_type": "LLA"
+                }
+
+            ]
+        },
+        {
+            "name": "Group 3 - IMUs",
+            "location_type": "SHOE",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "EuX",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "EuY",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "EuZ",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Nav_Ax",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Nav_Ay",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Nav_Az",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Body_Ax",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Body_Ay",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Body_Az",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelBodyFrameX",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelBodyFrameY",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelBodyFrameZ",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelNavFrameX",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelNavFrameY",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "AngVelNavFrameZ",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "Compass",
+                    "sensor_type": "L-SHOE"
+                },
+                {
+                    "name": "EuX",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "EuY",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "EuZ",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Nav_Ax",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Nav_Ay",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Nav_Az",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Body_Ax",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Body_Ay",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Body_Az",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRBodyFrameX",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRBodyFrameY",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRBodyFrameZ",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRNavFrameX",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRNavFrameY",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "AngVeRNavFrameZ",
+                    "sensor_type": "R-SHOE"
+                },
+                {
+                    "name": "Compass",
+                    "sensor_type": "R-SHOE"
+                }
+                
+            ]
+        },
+        {
+            "name": "Group 4 - Kitchen Objects",
+            "location_type": "KITCHEN",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "accX",
+                    "sensor_type": "CUP"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "CUP"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "CUP"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "CUP"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "CUP"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "SALAMI"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "SALAMI"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "SALAMI"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "SALAMI"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "SALAMI"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "WATER"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "WATER"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "WATER"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "WATER"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "WATER"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "CHEESE"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "CHEESE"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "CHEESE"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "CHEESE"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "CHEESE"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "BREAD"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "BREAD"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "BREAD"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "BREAD"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "BREAD"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "KNIFE1"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "KNIFE1"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "KNIFE1"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "KNIFE1"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "KNIFE1"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "MILK"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "MILK"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "MILK"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "MILK"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "MILK"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "SPOON"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "SPOON"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "SPOON"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "SPOON"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "SPOON"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "SUGAR"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "SUGAR"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "SUGAR"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "SUGAR"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "SUGAR"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "KNIFE2"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "KNIFE2"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "KNIFE2"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "KNIFE2"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "KNIFE2"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "PLATE"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "PLATE"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "PLATE"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "PLATE"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "PLATE"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "GLASS"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "GLASS"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "GLASS"
+                },
+                {
+                    "name": "gyroX",
+                    "sensor_type": "GLASS"
+                },
+                {
+                    "name": "gyroY",
+                    "sensor_type": "GLASS"
+                }
+            ]
+            
+        },
+        {
+            "name": "Group 5 - Switches",
+            "location_type": "KITCHEN",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "S1",
+                    "sensor_type": "DISHWASHER"
+                },
+                {
+                    "name": "S3",
+                    "sensor_type": "FRIDGE"
+                },
+                {
+                    "name": "S2",
+                    "sensor_type": "FRIDGE"
+                },
+                {
+                    "name": "S1",
+                    "sensor_type": "FRIDGE"
+                },
+                {
+                    "name": "S1",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "S2",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "S3",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "S3",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "S2",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "S2",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "S1",
+                    "sensor_type": "UPPERDRAWER"
+                },
+                {
+                    "name": "S3",
+                    "sensor_type": "DISHWASHER"
+                },
+                {
+                    "name": "S2",
+                    "sensor_type": "LOWERDRAWER"
+                }
+            ]
+        },
+        {
+            "name": "Group 5 - Object Accelerometers",
+            "location_type": "KITCHEN",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "accX",
+                    "sensor_type": "DOOR1"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "DOOR1"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "DOOR1"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LAZYCHAIR"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LAZYCHAIR"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LAZYCHAIR"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "DOOR2"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "DOOR2"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "DOOR2"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "DISHWASHER"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "DISHWASHER"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "DISHWASHER"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "UPPERDRAWER"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "UPPERDRAWER"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "UPPERDRAWER"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "LOWERDRAWER"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "MIDDLEDRAWER"
+                },
+                {
+                    "name": "accX",
+                    "sensor_type": "FRIDGE"
+                },
+                {
+                    "name": "accY",
+                    "sensor_type": "FRIDGE"
+                },
+                {
+                    "name": "accZ",
+                    "sensor_type": "FRIDGE"
+                }
+            ]
+        },
+        {
+            "name": "Group 5 - Location Tags",
+            "location_type": "KITCHEN",
+            "mac_address": "XXX.xx.xx.x",
+            "sensor_list":[
+                {
+                    "name": "X",
+                    "sensor_type": "TAG1"
+                },
+                {
+                    "name": "Y",
+                    "sensor_type": "TAG1"
+                },
+                {
+                    "name": "Z",
+                    "sensor_type": "TAG1"
+                },
+                {
+                    "name": "X",
+                    "sensor_type": "TAG2"
+                },
+                {
+                    "name": "Y",
+                    "sensor_type": "TAG2"
+                },
+                {
+                    "name": "Z",
+                    "sensor_type": "TAG2"
+                },
+                {
+                    "name": "X",
+                    "sensor_type": "TAG3"
+                },
+                {
+                    "name": "Y",
+                    "sensor_type": "TAG3"
+                },
+                {
+                    "name": "Z",
+                    "sensor_type": "TAG3"
+                },
+                {
+                    "name": "X",
+                    "sensor_type": "TAG4"
+                },
+                {
+                    "name": "Y",
+                    "sensor_type": "TAG4"
+                },
+                {
+                    "name": "Z",
+                    "sensor_type": "TAG4"
+                }
+
+            ]
+        }
+
+    ]
+}

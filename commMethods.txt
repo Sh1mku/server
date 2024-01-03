@@ -1,0 +1,37 @@
+Communication Between Clients And Server
+
+ADMIN -> SERVER
+
+Connect -> admin-<password>
+Network Status -> network
+Last Prediction -> lastPred
+Current Activity -> curAct
+Change Password -> chgPass-<password>
+Close Current Page -> close
+Disconnect -> disconnect
+-----------------------------------------------------------
+
+SERVER -> ADMIN
+
+Connect -> 
+Network Status -> network ? (ask enver & toaha) 
+Last Prediction -> double array[2][9000]
+Current Activity -> [result 1, result 2]
+Change Password -> password changed
+Close Current Page -> 
+Disconnect -> 
+-----------------------------------------------------------
+
+USER -> SERVER
+
+Connect -> user-<password>
+Change Password -> chgPass-<password>
+Disconnect -> disconnect
+-----------------------------------------------------------
+
+SERVER -> USER
+
+Connect -> 
+Change Password -> password changed
+ANOMALY -> anomaly-<anomalyExplaination>
+Disconnect -> disconnect
