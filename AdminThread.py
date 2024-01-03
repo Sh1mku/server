@@ -7,8 +7,8 @@ import json
 class AdminThread(threading.Thread):
     def __init__(self,client_socket,client_address,timeout, queueSend, queueRecieve):
         threading.Thread.__init__(self)
-        self.addressList = [client_address]
-        self.socketList = [client_socket]
+        self.client_address = client_address
+        self.client_socket = client_socket
         self.timeout = timeout
         self.adminMessage = "nothing"
         self.send_to_server = queueSend
@@ -60,7 +60,7 @@ class AdminThread(threading.Thread):
         json.dump(data, file)
         file.close()
 
-        send_to_server.put("chgPass-"+new_password)
+        self.send_to_server.put("chgPass-" + new_password)
 
 
 
@@ -72,6 +72,8 @@ class AdminThread(threading.Thread):
                     self.adminMessage="nothing"
                 else:
                     self.adminMessage = data
+                    print(f"Data received {self.adminMessage}")
+                    self.client_socket.send(f"MyActivity-{15}\n".encode())
             except ConnectionResetError:
                 print("Connection closed")
                 self.client_socket.close()
@@ -79,6 +81,8 @@ class AdminThread(threading.Thread):
             sleep(2)
 
     def adminSend(self):
+        print("Sending data")
+        self.client_socket.sendall("connectionsuccess\n".encode())
         while True:
             if self.adminMessage != "nothing":
                 msg = self.adminMessage.split("-")
