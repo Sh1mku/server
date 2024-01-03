@@ -2,11 +2,11 @@ import socket
 from threading import *
 from ClientConnectionClass import *
 class UserThread(Thread):
-    def __init__(self,client_socket,client_address,timeout,queue):
+    def __init__(self,client_socket,client_address,timeout,queue,clientQueue):
         Thread.__init__(self)
         self.connection_list = [ClientConnection(client_socket,client_address,timeout)]
         self.queue = queue
-    
+        self.client_queue = clientQueue
     def run(self):
         #if queue is not empty send the message to all clients
 
@@ -38,3 +38,19 @@ class UserThread(Thread):
     
     def get_size_connection_list(self):
         return len(self.connection_list)
+
+    def userRecieve(self,client_socket,client_address,timeout):
+        while True:
+            try:
+                data = self.client_socket.recv(1024).decode()
+                if data == "disconnect":
+                   self.connection_list.remove()
+                elif data == "chgPass":
+                    self.userMessage = data
+            except ConnectionResetError:
+                print("Connection closed")
+                self.client_socket.close()
+                break
+            sleep(2)
+
+        

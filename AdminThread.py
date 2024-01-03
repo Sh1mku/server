@@ -29,10 +29,14 @@ class AdminThread(threading.Thread):
         self.send_to_server.put("network")
         servermsg = self.recieve_from_server.get()
         return servermsg
+    
+
     def get_last_prediction(self):
         self.send_to_server.put("lastPred")
         servermsg = self.recieve_from_server.get()
         return servermsg
+    
+
     def get_current_action(self):
         self.send_to_server.put("curAct")
         servermsg = self.recieve_from_server.get()
@@ -55,6 +59,8 @@ class AdminThread(threading.Thread):
             print("File couldn't be found")
         json.dump(data, file)
         file.close()
+
+        send_to_server.put("chgPass-"+new_password)
 
 
 

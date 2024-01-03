@@ -1,10 +1,27 @@
 from queue import Queue
+from time import sleep
 import PatientInfoClass
 import SensorGroupClass
 import SensorClass
 import ClientConnectionClass
 import ExternalAlertConfigClass
 import ActivityPredictionClass
+import model
+import numpy as np
+import pandas as pd
+# import tensorflow as tf
+# from tensorflow import keras
+import sklearn 
+# from sklearn.model_selection import train_test_split
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.metrics import accuracy_score
+# from sklearn.metrics import classification_report
+# from tensorflow.keras.models import Sequential
+# from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
+# from tensorflow.keras.utils import to_categorical
+# from tensorflow.keras.optimizers import Adam
+
+
 
 from threading import Thread
 from datetime import datetime
@@ -24,37 +41,46 @@ class ServerClass(Thread):
         self.recieve_from_admin = adminsendqueue
         self.last5minQueue = Queue()
         self.last10min = []
+        self.admin_password = None
+        self.user_password = None
 
 
     def run(self):
         
-        self.initialize()
+        # self.initialize()
         get5minBeforeThread = Thread(target=self.get5minBefore)
         get5minBeforeThread.start()
 
         #TODO: must be changed to read from the sensors
-        try:
-            file = open("S1-ADL1_sensors_data.txt", "r")
-        except IOError:
-            print("File couldn't be found")
-            exit(1)
+
+        start_column = 1
+        end_column = 250
+
+        # Generate column names as a range of numbers 
+        column_names = list(range(start_column, end_column + 1))
+        df_subset = pd.read_csv('test_subset.csv')
 
         while True:
-            data = self.get_sensor_values(file)
+    
+            # send each row to the anomaly detector but as a pandas dataframe
+            for index, row in df_subset.iterrows():
             
+                data = pd.DataFrame(row[1:].values.reshape(1, -1), columns=column_names)
+                anomaly, locomotion_activity, confidence_locomotion = self.get_anomaly(data) #TODO: (anomaly,result1,result2) must return both results from models and anomaly/noAnomaly(will be implemented next week) 
+                print(anomaly, locomotion_activity, confidence_locomotion)
+                sleep(1) #TODO: must be changed to 1 second
+                self.last_prediction = ", ".join([str(anomaly), locomotion_activity, str(confidence_locomotion)])
+                self.last5minQueue.put(self.last_prediction)
+            
+                if anomaly:
+                    time = datetime.now()
+                    self.send_external_alert(anomaly,time)
 
-            anomaly = self.get_anomaly(data) #TODO: (anomaly,result1,result2) must return both results from models and anomaly/noAnomaly(will be implemented next week) 
-            self.last_prediction = anomaly
-            self.last5minQueue.put(anomaly)
-           
-            if anomaly[0] == True :
-                time = datetime.now()
-                self.send_external_alert(anomaly,time)
-
-                if self.connection_user:
-                    anomaly = anomaly + (time,)
-                    self.queue.put(anomaly)
-        file.close()
+                    if self.connection_user:
+                        anomaly = anomaly + (time,)
+                        self.queue.put(anomaly)
+            
+     
 
 
     def initialize(self):
@@ -64,8 +90,8 @@ class ServerClass(Thread):
             print("File couldn't be found")
             exit(1)
         data = json.load(file)
-        # self.admin_password = data["passwords"]["admin"]
-        # self.user_password = data["passwords"]["user"]
+        self.admin_password = data["passwords"]["admin"]
+        self.user_password = data["passwords"]["user"]
 
         for sensor_group in data["sensor_groups"]:
             self.sensor_groups.append(SensorGroupClass.SensorGroup(sensor_group["name"],sensor_group["connection_status"],sensor_group["sensors"]))
@@ -90,12 +116,13 @@ class ServerClass(Thread):
     def set_false_admin_connection(self):
         self.connection_admin = False 
 
-    def get_sensor_values(self,file):
-        return file.readline()
-
+    def get_sensor_values(self):
+        pass
+       
     #TODO: must return both results and prediction(will be implemented next week)
     def get_anomaly(self,data):
-        pass
+        anomaly, locomotion_activity, confidence_locomotion, _, _ = model.anomaly_detector(data)
+        return anomaly, locomotion_activity, confidence_locomotion
     
     #TODO: must send the anomaly to the external alert system(to be decided)
     def send_external_alert(self,anomaly,time):
@@ -139,12 +166,15 @@ class ServerClass(Thread):
         while True:
             if not self.recieve_from_admin.empty():
                 data = self.recieve_from_admin.get()
-                if data == "network":
+                data = data.split("-")
+                if data[0] == "network":
                     pass
-                elif data == "lastPred":
+                elif data[0] == "lastPred":
                     self.send_to_admin.put(self.last10min)
-                elif data == "curAct":
+                elif data[0] == "curAct":
                     self.send_to_admin.put(self.last_prediction)
+                elif data[0] == "chgPass":
+                    self.change_admin_password(data[1])
 
     def get_group_names(self):
         return [sensor_group.get_name() for sensor_group in self.sensor_groups]
@@ -173,18 +203,28 @@ class ServerClass(Thread):
     def get_last_prediction(self):
         return self.last_prediction
     
-    def get_client_connections(self):
-        return self.client_connections
-
-    def set_password(self, password):
-        self.password = password
-    def set_sensor_groups(self, sensor_groups):
-        self.sensor_groups = sensor_groups
-    def set_last_prediction(self, last_prediction):
-        self.last_prediction = last_prediction
-    def set_client_connections(self, client_connections):
-        self.client_connections = client_connections
-
-    def __str__(self):
-        return self.password + " " + self.sensor_groups + " " + self.last_prediction + " " + self.client_connections
+    def get_external_alert_list(self):
+        return self.external_alert_list 
     
+    def get_patient_info(self):
+        return self.patient_info
+    
+    def get_user_password(self):
+        return self.user_password
+    
+    def get_admin_password(self):
+        return self.admin_password
+    
+    def change_admin_password(self, new_password):
+
+        self.admin_password = new_password
+
+    def change_user_password(self, new_password):
+        self.user_password = new_password
+
+
+queue_user = Queue()
+queue_admin_send = Queue()
+queue_admin_recieve = Queue()
+serverThread = ServerClass(queue_user,queue_admin_recieve, queue_admin_send )
+serverThread.start()

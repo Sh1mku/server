@@ -6,19 +6,6 @@ from queue import Queue
 from AdminThread import AdminThread
 from ServerClass import ServerClass
 import UserThread
-import joblib
-import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
-from tensorflow.keras.utils import to_categorical
-from tensorflow.keras.optimizers import Adam
-import scikeras
-
 
 
 #create socket for external connections
@@ -40,6 +27,7 @@ if __name__ == "__main__":
     queue_user = Queue()
     queue_admin_send = Queue()
     queue_admin_recieve = Queue()
+    queue_user_recieve = Queue()
     #initialize & start the server thread
     serverThread = ServerClass(queue_user,queue_admin_recieve, queue_admin_send )
     serverThread.start()
@@ -66,7 +54,7 @@ if __name__ == "__main__":
                 serverThread.set_true_user_connection()
             #if userthread is closed create a new one
             except:
-                newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user)
+                newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user, queue_user_recieve)
                 newUserThread.start()
                 serverThread.set_true_user_connection()
             clientsocket.send("connectionsuccess".encode())
