@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 # import tensorflow as tf
 # from tensorflow import keras
-import sklearn 
+import sklearn
 # from sklearn.model_selection import train_test_split
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.metrics import accuracy_score
@@ -28,10 +28,11 @@ from datetime import datetime
 import json
 
 class ServerClass(Thread):
+    print(sklearn.__version__)
     def __init__(self,userqueue,adminreceivequeue,adminsendqueue):
         Thread.__init__(self)
         self.sensor_groups = [] # list of SensorGroupClass objects
-        self.last_prediction = None
+        self.last_prediction = ""
         self.external_alert_list = [] # list of ExternalAlertConfigClass objects
         self.patient_info = None
         self.connection_user= False
@@ -46,7 +47,9 @@ class ServerClass(Thread):
 
 
     def run(self):
-        
+        adminHandlingThread= Thread(target=self.admin_handler)
+        adminHandlingThread.start()
+
         # self.initialize()
         get5minBeforeThread = Thread(target=self.get5minBefore)
         get5minBeforeThread.start()
@@ -56,31 +59,32 @@ class ServerClass(Thread):
         start_column = 1
         end_column = 250
 
-        # Generate column names as a range of numbers 
+        # Generate column names as a range of numbers
         column_names = list(range(start_column, end_column + 1))
         df_subset = pd.read_csv('test_subset.csv')
 
         while True:
-    
+
             # send each row to the anomaly detector but as a pandas dataframe
             for index, row in df_subset.iterrows():
-            
+
                 data = pd.DataFrame(row[1:].values.reshape(1, -1), columns=column_names)
-                anomaly, locomotion_activity, confidence_locomotion = self.get_anomaly(data) #TODO: (anomaly,result1,result2) must return both results from models and anomaly/noAnomaly(will be implemented next week) 
-                print(anomaly, locomotion_activity, confidence_locomotion)
+                anomaly, locomotion_activity, confidence_locomotion = self.get_anomaly(data) #TODO: (anomaly,result1,result2) must return both results from models and anomaly/noAnomaly(will be implemented next week)
+                # print(anomaly, locomotion_activity, confidence_locomotion)
                 sleep(1) #TODO: must be changed to 1 second
-                self.last_prediction = ", ".join([str(anomaly), locomotion_activity, str(confidence_locomotion)])
+                self.last_prediction = "-".join([str(anomaly), locomotion_activity, str(int(confidence_locomotion))])
+                print(self.last_prediction)
                 self.last5minQueue.put(self.last_prediction)
-            
+
                 if anomaly:
                     time = datetime.now()
                     self.send_external_alert(anomaly,time)
 
                     if self.connection_user:
-                        anomaly = anomaly + (time,)
+                        anomalyInfo = self.last_prediction+"-"+str(time)
                         self.queue.put(anomaly)
-            
-     
+
+
 
 
     def initialize(self):
@@ -118,7 +122,7 @@ class ServerClass(Thread):
 
     def get_sensor_values(self):
         pass
-       
+
     #TODO: must return both results and prediction(will be implemented next week)
     def get_anomaly(self,data):
         anomaly, locomotion_activity, confidence_locomotion, _, _ = model.anomaly_detector(data)
@@ -172,7 +176,10 @@ class ServerClass(Thread):
                 elif data[0] == "lastPred":
                     self.send_to_admin.put(self.last10min)
                 elif data[0] == "curAct":
-                    self.send_to_admin.put(self.last_prediction)
+                    print(self.last_prediction)
+                    msg="-".join(self.last_prediction.split("-")[1:])
+                    print("message to queue ", msg)
+                    self.send_to_admin.put(msg)
                 elif data[0] == "chgPass":
                     self.change_admin_password(data[1])
 
@@ -204,17 +211,17 @@ class ServerClass(Thread):
         return self.last_prediction
     
     def get_external_alert_list(self):
-        return self.external_alert_list 
-    
+        return self.external_alert_list
+
     def get_patient_info(self):
         return self.patient_info
-    
+
     def get_user_password(self):
         return self.user_password
-    
+
     def get_admin_password(self):
         return self.admin_password
-    
+
     def change_admin_password(self, new_password):
 
         self.admin_password = new_password

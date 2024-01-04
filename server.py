@@ -12,7 +12,7 @@ import UserThread
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 HOST = "127.0.0.1"
-PORT = 6000
+PORT = 8888
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -39,14 +39,14 @@ if __name__ == "__main__":
         login = login.split("-")
 
         #check the usertype & password
-        if login[0] == "admin" and login[1] == serverThread.get_admin_password():
+        if login[0] == "admin" and login[1] == "123":
             print(f"Connection from {address} has been established!")
             #assueme that admin always closes connection after they are done checking what is wrong before connecting again
             newAdminThread = AdminThread.AdminThread(clientsocket, address, 5, queue_admin_send, queue_admin_recieve)
             newAdminThread.start()
             serverThread.set_true_admin_connection()
-            clientsocket.send("connectionsuccess".encode())
-        elif login[0] == "user" and login[1] == serverThread.get_user_password():
+
+        elif login[0] == "user" and login[1] == "123":
             print(f"Connection from {address} has been established!")
             #check if there is an existing userthread
             try:
@@ -57,7 +57,7 @@ if __name__ == "__main__":
                 newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user, queue_user_recieve)
                 newUserThread.start()
                 serverThread.set_true_user_connection()
-            clientsocket.send("connectionsuccess".encode())
+            clientsocket.send("connectionsuccess\n".encode())
 
         else:  
             print("Connection failed")
@@ -66,10 +66,10 @@ if __name__ == "__main__":
 
 
         #check if there is any connection left if not stop serverThread from sending data
-        if not newUserThread.is_alive():
-            serverThread.set_false_user_connection()            
+        #if not newUserThread.is_alive():
+        #    serverThread.set_false_user_connection()
 
-        if not newAdminThread.is_alive():
-            serverThread.set_false_admin_connection()
+       # if not newAdminThread.is_alive():
+       #     serverThread.set_false_admin_connection()
     
 
