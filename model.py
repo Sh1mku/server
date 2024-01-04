@@ -2,10 +2,11 @@ import joblib
 import numpy as np
 
 
-# define the gloabl variables
-
+# define the gloabl variables 
+# locomotion activities will always be these for the dataset chosen
 Locomotion_activities = {0: "Unlabelled Activity", 1:"Stand", 2:"Walk", 4:"Sit", 5:"Lie"}
 
+# these can be filtered/changed based on how we proceed
 label_to_activity = {
   406516: 'Open Door 1',
   406517: 'Open Door 2',
@@ -25,19 +26,40 @@ label_to_activity = {
   407521: 'Drink from Cup',
   405506: 'Toggle Switch' }
 
+# this was manually extracted by using data analysis 
+# and extracting what locomotion labels never occur for a particular activity in the dataset
 anomalies = {406516: [4,5], 404516: [4,5], 406520:[5], 406505: [4,5], 404505: [4,5],
              406519: [4, 5], 404519: [4,5], 408512: [4,5], 407521: [5], 405506: [4,5]}
 
 
-# Load the trained models
-Locomotion_model = joblib.load('rf_locomotion.joblib')
-Locomotion_scaler = joblib.load('rf_scaler_locomotion.joblib')
+def model_loader():
+    # Load the trained models
+    # use try catch block to handle exceptions
+    Locomotion_model = None
+    Locomotion_scaler = None
 
-# Objects_model  =
-# Objects_scalar =
+    try:
+      Locomotion_model = joblib.load('/content/gdrive/MyDrive/Opportunity_extracted/rf_90.joblib')
+      Locomotion_scaler = joblib.load('/content/gdrive/MyDrive/Opportunity_extracted/rf_scaler_90.joblib')
+      
+      # Objects_model  =
+      # Objects_scalar =
+    except Exception as e:
+      print("Error while loading the model! Error: {}".format(e))
+      print("Most likely problem with import of joblib and scikit learn or model files")
+
+    return Locomotion_model, Locomotion_scaler
+
 
 def perform_inference_locomotion(new_data):
     # order of features should match the order used during training
+
+    # lets load the models first
+    Locomotion_model, Locomotion_scaler = model_loader()
+
+    if Locomotion_model is None or Locomotion_scaler is None:
+        print("Error: Unable to load the model")
+        return
 
     # Drop unnecessary columns (since we are using holdout test dataset right now, we have to do this)
     # and if we send all the data from the server and use the anomaly detector function instead,
@@ -54,21 +76,22 @@ def perform_inference_locomotion(new_data):
 
     # Perform inference
     prediction_proba = Locomotion_model.predict_proba(Locomotion_scaler.transform(X))
-    predicted_class = np.argmax(prediction_proba)
+    prediction = Locomotion_model.predict(Locomotion_scaler.transform(X))
     predicted_probability = np.max(prediction_proba) * 100
 
     # check if correct label is being predicted: we can do this for the test set only:
 
-    # print("Actual label: ", y[0])
-    # print("Predicted label: ", predicted_class)
-    # print("Predicted probability: ", predicted_probability)
-    # print("--------------------------")
+    print("Actual label: ", y[0])
+    print("Predicted label: ", prediction[0])
+    print("Predicted probability (vote for majority class): ", predicted_probability)
+    print("--------------------------")
 
     # extract the class label
-    predicted_activity = Locomotion_activities[predicted_class]
+    predicted_activity = Locomotion_activities[prediction[0]]
 
     # we need predicted_class for anomaly detector and predicted_activity/confidence for the frontend
-    return predicted_class, predicted_activity, predicted_probability
+    return prediction, predicted_activity, predicted_probability
+
 
 
 
