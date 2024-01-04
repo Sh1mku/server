@@ -39,8 +39,8 @@ def model_loader():
     Locomotion_scaler = None
 
     try:
-      Locomotion_model = joblib.load('/content/gdrive/MyDrive/Opportunity_extracted/rf_90.joblib')
-      Locomotion_scaler = joblib.load('/content/gdrive/MyDrive/Opportunity_extracted/rf_scaler_90.joblib')
+      Locomotion_model = joblib.load('rf_locomotion.joblib')
+      Locomotion_scaler = joblib.load('rf_scaler_locomotion.joblib')
       
       # Objects_model  =
       # Objects_scalar =
