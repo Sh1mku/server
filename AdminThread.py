@@ -19,6 +19,11 @@ class AdminThread(threading.Thread):
         sendThread=threading.Thread(target=self.adminSend)
         receriveThread.start()
         sendThread.start()
+        if self.adminMessage == "disconnect":
+            self.client_socket.close()
+            receriveThread.join()
+            sendThread.join()
+            return
         sleep(5)
 
     """ TODO: this function should recieve the value of the sensorgroup 
@@ -63,7 +68,6 @@ class AdminThread(threading.Thread):
         self.send_to_server.put("chgPass-" + new_password)
 
 
-
     def adminRecieve(self):
         while True:
             try:
@@ -86,7 +90,11 @@ class AdminThread(threading.Thread):
         while True:
             if self.adminMessage != "nothing":
                 msg = self.adminMessage.split("-")
-                if msg[0] == "network":
+                if msg[0] == "disconnect":
+                    self.client_socket.close()
+                    self.send_to_server.put("disconnect")
+                    self.killThread()
+                elif msg[0] == "network":
                     sensor_values = self.get_sensor_status()
                     self.client_socket.send(sensor_values.encode())
                 elif msg[0] == "lastPred":
@@ -103,3 +111,6 @@ class AdminThread(threading.Thread):
                     self.client_socket.send("password changed".encode())
                     self.adminMessage = "nothing"
             sleep(1)
+
+    def killThread(self):
+        self.killThread = True

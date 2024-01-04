@@ -2,16 +2,17 @@ from queue import Queue
 from time import sleep
 import PatientInfoClass
 import SensorGroupClass
-import SensorClass
-import ClientConnectionClass
 import ExternalAlertConfigClass
-import ActivityPredictionClass
 import model
 import numpy as np
 import pandas as pd
+import sklearn
+from threading import Thread
+from datetime import datetime
+import json
+
 # import tensorflow as tf
 # from tensorflow import keras
-import sklearn
 # from sklearn.model_selection import train_test_split
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.metrics import accuracy_score
@@ -22,9 +23,6 @@ import sklearn
 # from tensorflow.keras.optimizers import Adam
 
 
-from threading import Thread
-from datetime import datetime
-import json
 
 
 class ServerClass(Thread):
@@ -152,7 +150,7 @@ class ServerClass(Thread):
     def get5minBefore(self):
         last5min = []
         sizeFirstHalf = 0
-        sizeSecondHalf = 900
+        sizeSecondHalf = 20
         upload = 0
         last10array = []
         while True:
@@ -164,20 +162,20 @@ class ServerClass(Thread):
                     sizeSecondHalf = 0
                     upload = 1
 
-                if sizeSecondHalf < 900:
+                if sizeSecondHalf < 20:
                     last10array.clear()
                     last10array = last10array + last5min
                     last10array.append(lastPrediction)
                     sizeSecondHalf += 1
 
-                if sizeFirstHalf == 900:
+                if sizeFirstHalf == 20:
                     last5min.pop(0)
                     last5min.append(lastPrediction)
                 else:
                     last5min.append(lastPrediction)
                     sizeFirstHalf += 1
 
-                if upload == 1 and sizeSecondHalf == 900:
+                if upload == 1 and sizeSecondHalf == 20:
                     self.last10min = last10array
                     upload = 0
 
@@ -191,9 +189,7 @@ class ServerClass(Thread):
                 elif data[0] == "lastPred":
                     self.send_to_admin.put(self.last10min)
                 elif data[0] == "curAct":
-                    print(self.last_prediction)
                     msg = "-".join(self.last_prediction.split("-")[1:])
-                    print("message to queue ", msg)
                     self.send_to_admin.put(msg)
                 elif data[0] == "chgPass":
                     self.change_admin_password(data[1])
@@ -208,6 +204,27 @@ class ServerClass(Thread):
                 return sensor_group.get_connection_status()
         print("Group not found")
         return None
+
+    
+
+    def change_admin_password(self, new_password):
+
+        self.admin_password = new_password
+
+    def change_user_password(self, new_password):
+        self.user_password = new_password
+
+    def client_check(self):
+        if self.user_update_queue.qsize():
+            data = self.user_update_queue.get()
+            data = data.split("-")
+            if(data[0] == "disconnect"):
+                self.set_false_user_connection()
+            elif data[0] == "chgPass":
+                self.change_user_password(data[1])
+            elif data[0] == "chgPat":
+                newInfo = PatientInfoClass.PatientInfo(data[1], data[2], data[3], data[4], data[5])
+                self.patient_info = newInfo
 
     def get_group_values(self, group_name, timestamp):  # TODO: must return a dict of sensor values & names
         pass
@@ -230,28 +247,6 @@ class ServerClass(Thread):
     def get_patient_info(self):
         return self.patient_info
 
-    def get_user_password(self):
-        return self.user_password
-
-    def get_admin_password(self):
-        return self.admin_password
-
-    def change_admin_password(self, new_password):
-
-        self.admin_password = new_password
-
-    def change_user_password(self, new_password):
-        self.user_password = new_password
-
-    def client_check(self):
-        if self.user_update_queue.qsize():
-            data = self.user_update_queue.get()
-            data = data.split("-")
-            if data[0] == "chgPass":
-                self.change_user_password(data[1])
-            elif data[0] == "chgPat":
-                newInfo = PatientInfoClass.PatientInfo(data[1], data[2], data[3], data[4], data[5])
-                self.patient_info = newInfo
 
 # print(sklearn.__version__)
 # queue_user = Queue()
