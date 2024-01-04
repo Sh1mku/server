@@ -57,7 +57,7 @@ class AdminThread(threading.Thread):
             file = open("config.json", "w")
         except IOError:
             print("File couldn't be found")
-        json.dump(data, file)
+        json.dump(data, file, indent=4)
         file.close()
 
         self.send_to_server.put("chgPass-" + new_password)

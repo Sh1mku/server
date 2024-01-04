@@ -25,14 +25,18 @@ print("Waiting for connections")
 if __name__ == "__main__":
     #initialize the queue for interthread communication
     queue_user = Queue()
+    queue_update_user = Queue()
     queue_admin_send = Queue()
     queue_admin_recieve = Queue()
     queue_user_recieve = Queue()
     #initialize & start the server thread
-    serverThread = ServerClass(queue_user,queue_admin_recieve, queue_admin_send )
+    serverThread = ServerClass(queue_user,queue_admin_recieve, queue_admin_send,queue_update_user)
     serverThread.start()
-
+    newUserThread=0
+    newAdminThread=0
+    i=0
     while True:
+        print(i)
         server.listen()
         clientsocket, address = server.accept()
         login=clientsocket.recv(1024).decode()
@@ -48,28 +52,28 @@ if __name__ == "__main__":
 
         elif login[0] == "user" and login[1] == "123":
             print(f"Connection from {address} has been established!")
+            clientsocket.send("connectionsuccess\n".encode())
             #check if there is an existing userthread
-            try:
+            print("hello-1")
+            if serverThread.get_user_connection():
                 newUserThread.add_connection(clientsocket, address, 5)
                 serverThread.set_true_user_connection()
             #if userthread is closed create a new one
-            except:
-                newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user, queue_user_recieve)
+            else:
+                print("hello0")
+                newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user, queue_update_user)
                 newUserThread.start()
+                print("hello")
                 serverThread.set_true_user_connection()
-            clientsocket.send("connectionsuccess\n".encode())
+                print("hello2")
+            
 
         else:  
             print("Connection failed")
             clientsocket.send("connectionfailed".encode())
             clientsocket.close()
+        print("hello2")
+        i+=1
 
-
-        #check if there is any connection left if not stop serverThread from sending data
-        #if not newUserThread.is_alive():
-        #    serverThread.set_false_user_connection()
-
-       # if not newAdminThread.is_alive():
-       #     serverThread.set_false_admin_connection()
-    
+    serverThread.join()
 

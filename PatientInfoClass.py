@@ -5,6 +5,7 @@ class PatientInfo:
         self.title = title
         self.telephone = telephone
         self.home_address = home_address
+
     def get_name(self):
         return self.name
     def get_surname(self):
@@ -15,6 +16,7 @@ class PatientInfo:
         return self.telephone
     def get_home_address(self):
         return self.home_address
+    
     def set_name(self,name):
         self.name = name
     def set_surname(self,surname):
@@ -25,5 +27,6 @@ class PatientInfo:
         self.telephone = telephone
     def set_home_address(self,home_address):
         self.home_address = home_address
+        
     def __str__(self):
         return self.title + " " + self.name + " " + self.surname + " " + self.telephone + " " + self.home_address

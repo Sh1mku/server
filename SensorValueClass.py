@@ -10,3 +10,8 @@ class SensorValueClass:
 
     def set_value(self, value):
         self.value = value
+    def set_timestamp(self, timestamp):
+        self.timestamp = timestamp
+    
+    def __str__(self):
+        return self.value + " " + self.timestamp

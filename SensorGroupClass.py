@@ -6,7 +6,10 @@ class SensorGroupClass:
         self.location_type = location_type
         self.mac_address = mac_address
         self.connection_status = connection_status
-        self.sensors = sensors # list of SensorClass objects
+        self.sensors = [] # list of SensorClass objects
+        for sensor in sensors:
+            self.sensors.append(SensorClass.SensorClass(sensor["name"],sensor["sensor_type"],1,0))
+         
     
     def get_name(self):
         return self.name
