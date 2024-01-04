@@ -222,7 +222,7 @@ class ServerClass(Thread):
     def change_user_password(self, new_password):
         self.user_password = new_password
 
-
+print(sklearn.__version__)
 queue_user = Queue()
 queue_admin_send = Queue()
 queue_admin_recieve = Queue()

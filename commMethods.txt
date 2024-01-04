@@ -26,6 +26,7 @@ USER -> SERVER
 
 Connect -> user-<password>
 Change Password -> chgPass-<password>
+Change Patient Info -> chgPat-<name>-<surname>-<title>-<telephone>-<home_adress>
 Disconnect -> disconnect
 -----------------------------------------------------------
 
@@ -34,4 +35,5 @@ SERVER -> USER
 Connect -> 
 Change Password -> password changed
 ANOMALY -> anomaly-<anomalyExplaination>
+Change Patient Info -> patient info changed
 Disconnect -> disconnect

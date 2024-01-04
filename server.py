@@ -3,7 +3,7 @@ import socket
 from threading import Thread
 import time
 from queue import Queue
-from AdminThread import AdminThread
+import AdminThread
 from ServerClass import ServerClass
 import UserThread
 
