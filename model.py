@@ -131,14 +131,13 @@ def anomaly_detector(new_data):
     # label1, object_activity, confidence_object = perform_inference_object(new_data)
     label2, locomotion_activity, confidence_locomotion = perform_inference_locomotion(new_data)
 
-    # for now label1 being set to 406516
+    # for now label1 being set to 406516  -> will give a false anomaly for now whenever label2 is one of [4, 5]
     label1 = 406516
 
-    # just for sake of completeness but will be fixed once our model 2 is fixed
     object_activity = "unknown"
     confidence_object = 0
 
     if label2 in anomalies[label1]:
-        return True, locomotion_activity, confidence_locomotion, object_activity, confidence_object
+        return "anomaly", locomotion_activity, confidence_locomotion, object_activity, confidence_object
     else:
-        return False, locomotion_activity, confidence_locomotion, object_activity, confidence_object
+        return "normal", locomotion_activity, confidence_locomotion, object_activity, confidence_object
