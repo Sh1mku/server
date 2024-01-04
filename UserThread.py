@@ -24,6 +24,7 @@ class UserThread(Thread):
         # if queue is not empty send the message to all clients
 
         while True:
+            
             if not self.queue.empty():
 
                 msg = self.queue.get()
@@ -41,7 +42,9 @@ class UserThread(Thread):
                         self.userThreads.pop(i)
                         self.connection_list[i].client_socket.close()
                     i += 1
-
+            if self.get_size_connection_list() == 0:
+                self.update_server_queue.put("disconnect")
+                break
             # if get_size_socket_list() == 0:
             #     self.client_socket.close()
             #     break
@@ -107,7 +110,13 @@ class UserThread(Thread):
                 data = client_socket.recv(1024).decode()
                 data = data.split("-")
                 if data[0] == "disconnect":
-                    self.connection_list.remove()
+                    i=0
+                    for connection in self.connection_list:
+                        if connection.client_socket == client_socket:
+                            self.connection_list.pop(i)
+                            self.userThreads.pop(i)
+                            break
+                        i+=1
                     client_socket.close()
                     break
                 elif data[0] == "chgPass":
