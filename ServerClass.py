@@ -71,6 +71,10 @@ class ServerClass(Thread):
 
                 data = pd.DataFrame(row[1:].values.reshape(1, -1), columns=column_names)
                 anomaly, locomotion_activity, confidence_locomotion = self.get_anomaly(data)  # TODO: (anomaly,result1,result2) must return both results from models and anomaly/noAnomaly(will be implemented next week)
+                if anomaly == "error":
+                    print("there was an error with model initiation or pred")
+                else:
+                    anomaly=bool(anomaly)
                 # print(anomaly, locomotion_activity, confidence_locomotion)
                 sleep(1)
                 self.last_prediction = "-".join([str(anomaly), locomotion_activity, str(int(confidence_locomotion))])

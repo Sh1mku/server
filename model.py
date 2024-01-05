@@ -138,8 +138,8 @@ def anomaly_detector(new_data):
 
     if label2 is None:
         print("A problem occurred with model loading and inference") 
-        return -1
+        return "error"
     elif label2 in anomalies[label1]:
-        return "anomaly", locomotion_activity, confidence_locomotion, object_activity, confidence_object
+        return "True", locomotion_activity, confidence_locomotion, object_activity, confidence_object
     else:
-        return "normal", locomotion_activity, confidence_locomotion, object_activity, confidence_object
+        return "False", locomotion_activity, confidence_locomotion, object_activity, confidence_object
