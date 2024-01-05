@@ -31,10 +31,12 @@ class UserThread(Thread):
                 i = 0
 
                 for connection in self.connection_list:
-                    print("sending to: ", i)
 
                     try:
-                        connection.client_socket.send(msg.encode())
+                        if(msg[0]=='T'):
+                            print("Sending Anomaly.")
+                            connection.client_socket.send("ANOMALY\n".encode())
+
                     except ConnectionResetError:
                         # if ConnectionResetError occurs, close the connection
                         print("Connection closed")
@@ -122,11 +124,14 @@ class UserThread(Thread):
                 elif data[0] == "chgPass":
                     # call function to change password
                     self.change_password(data[1], update_server_queue)
-                    client_socket.send("success".encode())
+                    print("Sending success for password change")
+                    client_socket.send("success\n".encode())
                 elif data[0] == "chgPat":
                     # call function to change patient info
+                    print(f"Received data for chgPat: {data}")
                     self.change_patient_info(data, update_server_queue)
-                    client_socket.send("success".encode())
+                    print(f"Sending success for contact info")
+                    client_socket.send("success\n".encode())
 
             except ConnectionResetError:
                 print("Connection closed")
