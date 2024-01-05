@@ -58,8 +58,7 @@ def perform_inference_locomotion(new_data):
     Locomotion_model, Locomotion_scaler = model_loader()
 
     if Locomotion_model is None or Locomotion_scaler is None:
-        print("Error: Unable to load the model")
-        return
+        return None, None, None
 
     # Drop unnecessary columns (since we are using holdout test dataset right now, we have to do this)
     # and if we send all the data from the server and use the anomaly detector function instead,
@@ -137,7 +136,10 @@ def anomaly_detector(new_data):
     object_activity = "unknown"
     confidence_object = 0
 
-    if label2 in anomalies[label1]:
+    if label2 is None:
+        print("A problem occurred with model loading and inference") 
+        return -1
+    elif label2 in anomalies[label1]:
         return "anomaly", locomotion_activity, confidence_locomotion, object_activity, confidence_object
     else:
         return "normal", locomotion_activity, confidence_locomotion, object_activity, confidence_object
