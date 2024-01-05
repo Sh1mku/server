@@ -221,6 +221,7 @@ class ServerClass(Thread):
             if(data[0] == "disconnect"):
                 self.set_false_user_connection()
             elif data[0] == "chgPass":
+                print("Received chgPass")
                 self.change_user_password(data[1])
             elif data[0] == "chgPat":
                 newInfo = PatientInfoClass.PatientInfo(data[1], data[2], data[3], data[4], data[5])

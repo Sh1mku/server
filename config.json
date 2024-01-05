@@ -1,17 +1,16 @@
 {
-    "passwords":{
+    "passwords": {
         "admin": "98765",
-        "user": "12345"
+        "user": "567"
     },
-    "patient_info":{
-        "name": "kerem",
-        "surname": "can",
-        "title": "Mr.",
-        "telephone": "1234567890",
-        "home_address": "ODTU KKK RZ-33, Kalkanli, Guzelyurt, KKTC"
-
+    "patient_info": {
+        "name": "TestName",
+        "surname": "SurTest",
+        "title": "Mr",
+        "telephone": "135216263",
+        "home_address": "myAdress"
     },
-    "external_alert_configs":[
+    "external_alert_configs": [
         {
             "full_name": "Emergency Service",
             "gsm_number": "911",
@@ -22,14 +21,13 @@
             "gsm_number": "+90 392 723 63 51",
             "email_address": "info.lcth@gov.ct.tr"
         }
-
     ],
-    "sensor_groups":[
+    "sensor_groups": [
         {
             "name": "Group 1 - Accelometers",
             "location_type": "BODY",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "accX",
                     "sensor_type": "RKN^"
@@ -180,7 +178,7 @@
             "name": "Group 2 - IMUs",
             "location_type": "BODY",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "accX",
                     "sensor_type": "BACK"
@@ -441,14 +439,13 @@
                     "name": "Quaternion4",
                     "sensor_type": "LLA"
                 }
-
             ]
         },
         {
             "name": "Group 3 - IMUs",
             "location_type": "SHOE",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "EuX",
                     "sensor_type": "L-SHOE"
@@ -577,14 +574,13 @@
                     "name": "Compass",
                     "sensor_type": "R-SHOE"
                 }
-                
             ]
         },
         {
             "name": "Group 4 - Kitchen Objects",
             "location_type": "KITCHEN",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "accX",
                     "sensor_type": "CUP"
@@ -826,13 +822,12 @@
                     "sensor_type": "GLASS"
                 }
             ]
-            
         },
         {
             "name": "Group 5 - Switches",
             "location_type": "KITCHEN",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "S1",
                     "sensor_type": "DISHWASHER"
@@ -891,7 +886,7 @@
             "name": "Group 5 - Object Accelerometers",
             "location_type": "KITCHEN",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "accX",
                     "sensor_type": "DOOR1"
@@ -994,7 +989,7 @@
             "name": "Group 5 - Location Tags",
             "location_type": "KITCHEN",
             "mac_address": "XXX.xx.xx.x",
-            "sensor_list":[
+            "sensor_list": [
                 {
                     "name": "X",
                     "sensor_type": "TAG1"
@@ -1043,9 +1038,7 @@
                     "name": "Z",
                     "sensor_type": "TAG4"
                 }
-
             ]
         }
-
     ]
 }
