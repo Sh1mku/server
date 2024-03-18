@@ -36,7 +36,6 @@ if __name__ == "__main__":
     newAdminThread=0
     i=0
     while True:
-        print(i)
         server.listen()
         clientsocket, address = server.accept()
         login=clientsocket.recv(1024).decode()
@@ -54,25 +53,20 @@ if __name__ == "__main__":
             print(f"Connection from {address} has been established!")
             clientsocket.send("connectionsuccess\n".encode())
             #check if there is an existing userthread
-            print("hello-1")
             if serverThread.get_user_connection():
                 newUserThread.add_connection(clientsocket, address, 5)
                 serverThread.set_true_user_connection()
             #if userthread is closed create a new one
             else:
-                print("hello0")
                 newUserThread = UserThread.UserThread(clientsocket, address, 5, queue_user, queue_update_user)
                 newUserThread.start()
-                print("hello")
                 serverThread.set_true_user_connection()
-                print("hello2")
             
 
         else:  
             print("Connection failed")
             clientsocket.send("connectionfailed".encode())
             clientsocket.close()
-        print("hello2")
         i+=1
 
     serverThread.join()

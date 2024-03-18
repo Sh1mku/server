@@ -1,14 +1,14 @@
 {
     "passwords": {
         "admin": "98765",
-        "user": "567"
+        "user": "123"
     },
     "patient_info": {
-        "name": "TestName",
-        "surname": "SurTest",
-        "title": "Mr",
-        "telephone": "135216263",
-        "home_address": "myAdress"
+        "name": "Utku",
+        "surname": "Unsal",
+        "title": "Mr.",
+        "telephone": "5333333333",
+        "home_address": "Kalkanl\u0131 G\u00fczelyurt"
     },
     "external_alert_configs": [
         {

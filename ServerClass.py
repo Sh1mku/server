@@ -26,7 +26,6 @@ import json
 
 
 class ServerClass(Thread):
-    print(sklearn.__version__)
 
     def __init__(self, userqueue, adminreceivequeue, adminsendqueue, userUpdateQueue):
         Thread.__init__(self)

@@ -76,7 +76,7 @@ class AdminThread(threading.Thread):
                     self.adminMessage="nothing"
                 else:
                     self.adminMessage = data
-                    print(f"Data receivedaa {self.adminMessage}")
+                    #print(f"Data receivedaa {self.adminMessage}")
             except ConnectionResetError:
                 print("Connection closed")
                 self.client_socket.close()
@@ -84,7 +84,6 @@ class AdminThread(threading.Thread):
             sleep(1)
 
     def adminSend(self):
-        print("Sending data")
         self.client_socket.send("connectionsuccess\n".encode())
         while True:
             if self.adminMessage != "nothing":
@@ -98,13 +97,15 @@ class AdminThread(threading.Thread):
                     print(f"Sending Network as {sensor_values}")
                     self.client_socket.send(sensor_values.encode())
                 elif msg[0] == "lastPred":
-                    prediction = self.get_last_prediction()
+                    #prediction = self.get_last_prediction()
+                    prediction = [1.0, 3.0, 0.0, 2.0, 4.0, 0.0, 1.0, 3.0, 2.0, 4.0, 1.0, 0.0, 3.0, 2.0, 4.0, 1.0, 0.0,
+                                  2.0, 3.0, 4.0]
                     print(f"Sending lastPred as {prediction}")
-                    self.client_socket.send(prediction.encode())
+                    self.client_socket.send(("lastpred:"+(str(prediction)+"\n")).encode())
                     self.adminMessage = "nothing"
                 elif msg[0] == "curAct":
                     action = self.get_current_action()
-                    print("current action: ", action)
+                    print("Sending the current action: ", action)
                     action=action+"\n"
                     self.client_socket.send(action.encode())
                 elif msg[0] == "chgPass":
